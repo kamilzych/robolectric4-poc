@@ -8,21 +8,16 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import org.junit.Rule
+import org.robolectric.Robolectric
+
+
 
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
 
-    @Rule
-    @JvmField
-    val activityRule = object : ActivityTestRule<MainActivity>(MainActivity::class.java) {
-        override fun getActivityIntent(): Intent {
-            val context = InstrumentationRegistry.getTargetContext()
-            return MainActivity.createIntent(context, "foo")
-        }
-    }
-
     @Test
     fun start() {
-        //do nothing, activityRule will launch the Intent
+        val context = InstrumentationRegistry.getTargetContext()
+        Robolectric.buildActivity(MainActivity::class.java, MainActivity.createIntent(context, "foo")).create().get()
     }
 }
